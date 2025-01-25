@@ -20,6 +20,7 @@ Prompts and helpers that work well with aider-chat
 
 ## Pre-Reqs
 ```
+read -p "Did you make backups? " answer && [[ "$answer" == "Yes" ]] || (echo "Backups required" && exit 1)
 alias aid3r="aider --yes-always --map-tokens 0 --map-refresh always --no-auto-commit --dark-mode --edit-format architect --no-detect-urls --no-suggest-shell-commands --weak-model anthropic/claude-3-5-sonnet-20241022 "
 ```
 
