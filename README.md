@@ -18,11 +18,21 @@ Prompts and helpers that work well with aider-chat
 ---
 ---
 
+## Pre-Reqs
+```
+alias aid3r="aider --yes-always --map-tokens 0 --map-refresh always --no-auto-commit --dark-mode --edit-format architect --no-detect-urls --no-suggest-shell-commands --weak-model anthropic/claude-3-5-sonnet-20241022 "
+```
+
 
 ### eslinting an entire project
 ```
 cd my-code-base && \
 time find src/ -type f -name "*.js" -o -name "*.jsx" | while read file; do echo $file; if ! npx eslint --fix "$file" > /dev/null 2>&1; then    msg=$(npx eslint "$file" 2>&1 | tr '\n' ' ');    aider --yes-always --map-tokens 0 --map-refresh always --no-auto-commit --dark-mode --edit-format architect --no-detect-urls --no-suggest-shell-commands --weak-model anthropic/claude-3-5-sonnet-20241022 --message "$msg" --file "$file";  fi; don
+```
+
+### eslint fix single file
+```
+aid3r --file src/views/events/accountingComponents.jsx --read ../CONVENTIONS.md --message "$(eslint src/views/events/accountingComponents.jsx)"
 ```
 
 ### in-line code documentation
