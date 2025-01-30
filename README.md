@@ -28,7 +28,16 @@ alias aid3r="aider --yes-always --map-tokens 0 --map-refresh always --no-auto-co
 ### eslinting an entire project
 ```
 cd my-code-base && \
-time find src/ -type f -name "*.js" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.ts" | while read file; do echo $file; if ! npx eslint --fix "$file" > /dev/null 2>&1; then    msg=$(npx eslint "$file" 2>&1 | tr '\n' ' ');    aider --yes-always --map-tokens 0 --map-refresh always --no-auto-commit --dark-mode --edit-format architect --no-detect-urls --no-suggest-shell-commands --o1-preview --message "$msg" --file "$file";  fi; done
+time find src/ -type f -name "*.js" -o -name "*.jsx" -o -name "*.tsx" -o -name "*.ts" |
+  while read file; do \
+    echo $file; \
+    if ! npx eslint --fix "$file" > /dev/null 2>&1; then \
+      msg=$(npx eslint "$file" 2>&1 | tr '\n' ' '); \
+      aider --yes-always --map-tokens 0 --map-refresh always --no-auto-commit --dark-mode \
+            --edit-format architect --no-detect-urls --no-suggest-shell-commands --o1-preview \
+            --message "$msg" --file "$file"; \
+    fi; \
+  done
 ```
 
 ### eslint fix single file
